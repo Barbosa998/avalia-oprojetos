@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação de Projetos Científicos</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 139, 0.2);
+            width: 60%;
+            margin: auto;
+            text-align: left;
+        }
+        h2 {
+            color: #00274D;
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            color: #004080;
+            display: block;
+            margin-top: 20px;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #004080;
+            border-radius: 5px;
+        }
+        input[type=range] {
+            cursor: pointer;
+        }
+        button {
+            background: #004080;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+        button:hover {
+            background: #00274D;
+        }
+        .resultado {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #004080;
+        }
+        .criterio-container {
+            margin-bottom: 30px;
+        }
+        .criterio-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Avaliação de Projetos Científicos</h2>
+        <label for="titulo">Título do Projeto:</label>
+        <input type="text" id="titulo" placeholder="Digite o título do projeto">
+        
+        <div class="criterio-container">
+            <label for="criterio1">Mérito, originalidade e relevância do projeto para o desenvolvimento científico,
+tecnológico e de inovação do Estado do Paraná e do País.</label>
+            <input type="range" id="criterio1" min="0" max="100" value="0" oninput="atualizarNota('criterio1', 'valor1')">
+            <span id="valor1">0</span>
+            <textarea id="obs1" placeholder="Observação..."></textarea>
+        </div>
+        
+        <div class="criterio-container">
+            <label for="criterio2">Coerência e adequação do problema de pesquisa aos objetivos, metodologia e
+resultados esperados no projeto de pesquisa. </label>
+            <input type="range" id="criterio2" min="0" max="100" value="0" oninput="atualizarNota('criterio2', 'valor2')">
+            <span id="valor2">0</span>
+            <textarea id="obs2" placeholder="Observação..."></textarea>
+        </div>
+        
+        <div class="criterio-container">
+            <label for="criterio3">Coerência e adequação do cronograma de atividades com os resultados esperados do
+projeto de pesquisa. </label>
+            <input type="range" id="criterio3" min="0" max="100" value="0" oninput="atualizarNota('criterio3', 'valor3')">
+            <span id="valor3">0</span>
+            <textarea id="obs3" placeholder="Observação..."></textarea>
+        </div>
+        
+        <div class="criterio-container">
+            <label for="criterio4">Aderência do projeto de pesquisa proposto a um ou mais temas (Domínios e
+Subdomínios) do Paraná 2040 – Rotas Estratégicas de Ciência, Tecnologia & Inovação
+(CT&I), Ecossistema Norte Pioneiro.</label>
+            <input type="range" id="criterio4" min="0" max="100" value="0" oninput="atualizarNota('criterio4', 'valor4')">
+            <span id="valor4">0</span>
+            <textarea id="obs4" placeholder="Observação..."></textarea>
+        </div>
+        
+        <div class="criterio-container">
+            <label for="criterio5">Coerência e adequação entre a experiência da equipe do projeto e os objetivos,
+atividades e metas propostos.</label>
+            <input type="range" id="criterio5" min="0" max="100" value="0" oninput="atualizarNota('criterio5', 'valor5')">
+            <span id="valor5">0</span>
+            <textarea id="obs5" placeholder="Observação..."></textarea>
+        </div>
+        
+        <div class="criterio-container">
+            <label for="criterio6">Plano para Promoção, Popularização e Divulgação Científica e Tecnológica</label>
+            <input type="range" id="criterio6" min="0" max="100" value="0" oninput="atualizarNota('criterio6', 'valor6')">
+            <span id="valor6">0</span>
+            <textarea id="obs6" placeholder="Observação..."></textarea>
+        </div>
+
+        <button onclick="salvarRespostas()">Enviar Respostas</button>
+        <button onclick="solicitarSenha()">Baixar Planilha</button>
+        <div class="resultado" id="resultado"></div>
+    </div>
+
+    <script>
+        function atualizarNota(criterioId, valorId) {
+            document.getElementById(valorId).innerText = document.getElementById(criterioId).value;
+        }
+
+        function solicitarSenha() {
+            let senha = prompt("Digite a senha para baixar a planilha:");
+            if (senha === "Iceti@25") {
+                exportarParaExcel();
+            } else {
+                alert("Senha incorreta! Acesso negado.");
+            }
+        }
+
+        function salvarRespostas() {
+            alert("Respostas enviadas com sucesso!");
+        }
+    </script>
+</body>
+</html>
