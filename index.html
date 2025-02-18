@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação de Projetos</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; text-align: center; padding: 20px; }
+        .container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); width: 50%; margin: auto; }
+        input, textarea, button { width: 100%; padding: 10px; margin-top: 10px; }
+        button { background: blue; color: white; border: none; cursor: pointer; }
+        button:hover { background: darkblue; }
+        .resultado { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Avaliação de Projetos</h2>
+
+        <!-- Campos para nome do avaliador e protocolo -->
+        <label for="avaliador">Nome do Avaliador:</label>
+        <input type="text" id="avaliador" placeholder="Digite seu nome">
+
+        <label for="protocolo">Protocolo do Projeto:</label>
+        <input type="text" id="protocolo" placeholder="Digite o protocolo do projeto">
+
+        <label for="titulo">Título do Projeto:</label>
+        <input type="text" id="titulo" placeholder="Digite o título do projeto">
+
+        <!-- Campos de critérios de avaliação -->
+        <label for="criterio1">Mérito, originalidade e relevância (0 a 100)</label>
+        <input type="range" id="criterio1" min="0" max="100" value="50" oninput="atualizarNota('criterio1', 'valor1')">
+        <span id="valor1">50</span>
+        <textarea id="obs1" placeholder="Observação..."></textarea>
+
+        <label for="criterio2">Coerência do problema de pesquisa (0 a 100)</label>
+        <input type="range" id="criterio2" min="0" max="100" value="50" oninput="atualizarNota('criterio2', 'valor2')">
+        <span id="valor2">50</span>
+        <textarea id="obs2" placeholder="Observação..."></textarea>
+
+        <label for="criterio3">Coerência do cronograma (0 a 100)</label>
+        <input type="range" id="criterio3" min="0" max="100" value="50" oninput="atualizarNota('criterio3', 'valor3')">
+        <span id="valor3">50</span>
+        <textarea id="obs3" placeholder="Observação..."></textarea>
+
+        <label for="criterio4">Aderência ao Paraná 2040 (0 a 100)</label>
+        <input type="range" id="criterio4" min="0" max="100" value="50" oninput="atualizarNota('criterio4', 'valor4')">
+        <span id="valor4">50</span>
+        <textarea id="obs4" placeholder="Observação..."></textarea>
+
+        <label for="criterio5">Experiência da equipe (0 a 100)</label>
+        <input type="range" id="criterio5" min="0" max="100" value="50" oninput="atualizarNota('criterio5', 'valor5')">
+        <span id="valor5">50</span>
+        <textarea id="obs5" placeholder="Observação..."></textarea>
+
+        <label for="criterio6">Plano de Divulgação Científica (0 a 100)</label>
+        <input type="range" id="criterio6" min="0" max="100" value="50" oninput="atualizarNota('criterio6', 'valor6')">
+        <span id="valor6">50</span>
+        <textarea id="obs6" placeholder="Observação..."></textarea>
+
+        <!-- Botões -->
+        <button onclick="salvarLocal()">Salvar Respostas</button>
+        <button onclick="solicitarSenha()">Baixar Planilha</button>
+
+        <!-- Resultado da operação -->
+        <div class="resultado" id="resultado"></div>
+    </div>
+
+    <script>
+        // Função para atualizar as notas em tempo real
+        function atualizarNota(criterioId, valorId) {
+            document.getElementById(valorId).innerText = document.getElementById(criterioId).value;
+        }
+
+        // Função para salvar os dados no localStorage
+        function salvarLocal() {
+            let avaliador = document.getElementById("avaliador").value;
+            let protocolo = document.getElementById("protocolo").value;
+            let titulo = document.getElementById("titulo").value;
+            let criterio1 = document.getElementById("criterio1").value;
+            let criterio2 = document.getElementById("criterio2").value;
+            let criterio3 = document.getElementById("criterio3").value;
+            let criterio4 = document.getElementById("criterio4").value;
+            let criterio5 = document.getElementById("criterio5").value;
+            let criterio6 = document.getElementById("criterio6").value;
+
+            // Salvando os dados no localStorage
+            localStorage.setItem("avaliador", avaliador);
+            localStorage.setItem("protocolo", protocolo);
+            localStorage.setItem("titulo", titulo);
+            localStorage.setItem("criterio1", criterio1);
+            localStorage.setItem("criterio2", criterio2);
+            localStorage.setItem("criterio3", criterio3);
+            localStorage.setItem("criterio4", criterio4);
+            localStorage.setItem("criterio5", criterio5);
+            localStorage.setItem("criterio6", criterio6);
+
+            alert("Dados salvos localmente!");
+        }
+
+        // Função para carregar os dados do localStorage ao carregar a página
+        function carregarLocal() {
+            document.getElementById("avaliador").value = localStorage.getItem("avaliador") || '';
+            document.getElementById("protocolo").value = localStorage.getItem("protocolo") || '';
+            document.getElementById("titulo").value = localStorage.getItem("titulo") || '';
+            document.getElementById("criterio1").value = localStorage.getItem("criterio1") || '50';
+            document.getElementById("criterio2").value = localStorage.getItem("criterio2") || '50';
+            document.getElementById("criterio3").value = localStorage.getItem("criterio3") || '50';
+            document.getElementById("criterio4").value = localStorage.getItem("criterio4") || '50';
+            document.getElementById("criterio5").value = localStorage.getItem("criterio5") || '50';
+            document.getElementById("criterio6").value = localStorage.getItem("criterio6") || '50';
+        }
+
+        // Função para solicitar senha e exportar para Excel
+        function solicitarSenha() {
+            let senha = prompt("Digite a senha para baixar a planilha:");
+            if (senha === "Iceti@25") {
+                exportarParaExcel();
+            } else {
+                alert("Senha incorreta! Acesso negado.");
+            }
+        }
+
+        // Função para exportar os dados para Excel
+        function exportarParaExcel() {
+            let avaliador = document.getElementById("avaliador").value;
+            let protocolo = document.getElementById("protocolo").value;
+            let titulo = document.getElementById("titulo").value;
+            let dados = [
+                ["Nome do Avaliador", "Protocolo", "Título do Projeto", "Mérito", "Obs", "Coerência Problema", "Obs", "Coerência Cronograma", "Obs", "Aderência", "Obs", "Experiência Equipe", "Obs", "Plano Divulgação", "Obs"],
+                [
+                    avaliador, protocolo, titulo,
+                    document.getElementById("criterio1").value, document.getElementById("obs1").value,
+                    document.getElementById("criterio2").value, document.getElementById("obs2").value,
+                    document.getElementById("criterio3").value, document.getElementById("obs3").value,
+                    document.getElementById("criterio4").value, document.getElementById("obs4").value,
+                    document.getElementById("criterio5").value, document.getElementById("obs5").value,
+                    document.getElementById("criterio6").value, document.getElementById("obs6").value
+                ]
+            ];
+
+            let ws = XLSX.utils.aoa_to_sheet(dados);
+            let wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Avaliação");
+
+            XLSX.writeFile(wb, "Avaliacao_Projeto.xlsx");
+            document.getElementById("resultado").innerText = "Arquivo Excel salvo com sucesso!";
+        }
+
+        // Chama a função de carregar os dados ao carregar a página
+        window.onload = carregarLocal;
+    </script>
+    
+    <!-- Biblioteca para manipulação de arquivos Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+</body>
+</html>
