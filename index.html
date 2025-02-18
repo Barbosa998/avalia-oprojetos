@@ -1,142 +1,134 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avaliação de Projetos Científicos</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
             text-align: center;
-            margin: 30px;
-            background-color: #f5f5f5;
+            padding: 20px;
         }
-        h2 {
-            color: #004080;
-        }
-        form {
+        .container {
             background: white;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
+            box-shadow: 0px 0px 15px rgba(0, 0, 139, 0.2);
             width: 60%;
             margin: auto;
-        }
-        .campo {
-            margin: 15px 0;
             text-align: left;
+        }
+        h2 {
+            color: #00274D;
+            text-align: center;
         }
         label {
             font-weight: bold;
+            color: #004080;
+            display: block;
+            margin-top: 20px;
         }
-        input, textarea, select {
+        input, button {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             margin-top: 5px;
+            border: 1px solid #004080;
             border-radius: 5px;
-            border: 1px solid gray;
+        }
+        input[type=range] {
+            cursor: pointer;
         }
         button {
-            padding: 10px;
             background: #004080;
             color: white;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
+            font-size: 16px;
+            margin-top: 15px;
         }
         button:hover {
-            background: #002040;
+            background: #00274D;
         }
-        #download-section {
-            margin-top: 30px;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
-            width: 40%;
-            margin: auto;
-        }
-        img {
-            width: 100%;
-            border-radius: 10px;
+        .resultado {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #004080;
         }
     </style>
-    <script>
-        function verificarSenha() {
-            var senha = document.getElementById("senha").value;
-            if (senha === "Iceti@25") {
-                window.location.href = "avaliacao_projetos.xlsx";  // Nome exato do arquivo no repositório
-            } else {
-                alert("Senha incorreta! Tente novamente.");
-            }
-        }
-
-        function enviarFormulario(event) {
-            event.preventDefault();
-            alert("Respostas enviadas com sucesso!");
-        }
-    </script>
 </head>
 <body>
-
-    <h2>Avaliação de Projetos Científicos</h2>
-    <p>Preencha os campos abaixo para avaliar o projeto.</p>
-
-    <img src="https://source.unsplash.com/800x400/?science,technology" alt="Imagem relacionada à ciência">
-
-    <form onsubmit="enviarFormulario(event)">
-        <div class="campo">
-            <label for="titulo">Título do Projeto:</label>
-            <input type="text" id="titulo" required>
-        </div>
-
-        <div class="campo">
-            <label for="criterio1">Mérito, originalidade e relevância do projeto (0-100):</label>
-            <input type="number" id="criterio1" min="0" max="100" required>
-            <textarea placeholder="Observações"></textarea>
-        </div>
-
-        <div class="campo">
-            <label for="criterio2">Coerência do problema de pesquisa aos objetivos e metodologia (0-100):</label>
-            <input type="number" id="criterio2" min="0" max="100" required>
-            <textarea placeholder="Observações"></textarea>
-        </div>
-
-        <div class="campo">
-            <label for="criterio3">Adequação do cronograma com os resultados esperados (0-100):</label>
-            <input type="number" id="criterio3" min="0" max="100" required>
-            <textarea placeholder="Observações"></textarea>
-        </div>
-
-        <div class="campo">
-            <label for="criterio4">Aderência aos temas do Paraná 2040 - Rotas Estratégicas de CT&I (0-100):</label>
-            <input type="number" id="criterio4" min="0" max="100" required>
-            <textarea placeholder="Observações"></textarea>
-        </div>
-
-        <div class="campo">
-            <label for="criterio5">Coerência entre a equipe e os objetivos do projeto (0-100):</label>
-            <input type="number" id="criterio5" min="0" max="100" required>
-            <textarea placeholder="Observações"></textarea>
-        </div>
-
-        <div class="campo">
-            <label for="criterio6">Plano para Promoção e Divulgação Científica e Tecnológica (0-100):</label>
-            <input type="number" id="criterio6" min="0" max="100" required>
-            <textarea placeholder="Observações"></textarea>
-        </div>
-
-        <button type="submit">Enviar Avaliação</button>
-    </form>
-
-    <div id="download-section">
-        <h3>Download da Planilha</h3>
-        <p>Insira a senha para baixar a planilha de avaliação:</p>
-        <input type="password" id="senha" placeholder="Digite a senha">
-        <button onclick="verificarSenha()">Baixar</button>
+    <div class="container">
+        <h2>Avaliação de Projetos Científicos</h2>
+        
+        <label for="avaliador">Nome do Avaliador:</label>
+        <input type="text" id="avaliador" placeholder="Digite seu nome">
+        
+        <label for="protocolo">Protocolo do Projeto:</label>
+        <input type="text" id="protocolo" placeholder="Digite o protocolo do projeto">
+        
+        <label for="titulo">Título do Projeto:</label>
+        <input type="text" id="titulo" placeholder="Digite o título do projeto">
+        
+        <div id="criterios"></div>
+        
+        <button onclick="salvarRespostas()">Enviar Respostas</button>
+        <div class="resultado" id="resultado"></div>
     </div>
 
+    <script>
+        const criterios = [
+            "Mérito, originalidade e relevância do projeto...",
+            "Coerência e adequação do problema de pesquisa...",
+            "Coerência e adequação do cronograma de atividades...",
+            "Aderência do projeto aos temas do Paraná 2040...",
+            "Coerência e adequação entre a experiência da equipe...",
+            "Plano para Promoção, Popularização e Divulgação Científica..."
+        ];
+
+        const criteriosContainer = document.getElementById("criterios");
+        criterios.forEach((criterio, index) => {
+            const div = document.createElement("div");
+            div.classList.add("criterio-container");
+            div.innerHTML = `
+                <label for="criterio${index}">${criterio}</label>
+                <input type="range" id="criterio${index}" min="0" max="100" value="0" oninput="atualizarNota('criterio${index}', 'valor${index}')">
+                <span id="valor${index}">0</span>
+                <input type="text" id="obs${index}" value="Observação Padrão" readonly>
+            `;
+            criteriosContainer.appendChild(div);
+        });
+
+        function atualizarNota(criterioId, valorId) {
+            document.getElementById(valorId).innerText = document.getElementById(criterioId).value;
+        }
+
+        function salvarRespostas() {
+            const dados = {
+                avaliador: document.getElementById("avaliador").value,
+                protocolo: document.getElementById("protocolo").value,
+                titulo: document.getElementById("titulo").value,
+                criterios: Array.from({ length: 6 }, (_, i) => ({
+                    nota: document.getElementById(`criterio${i}`).value,
+                    observacao: document.getElementById(`obs${i}`).value
+                }))
+            };
+
+            fetch("SUA_URL_DO_APP_SCRIPT", {
+                method: "POST",
+                body: JSON.stringify(dados),
+                headers: { "Content-Type": "application/json" }
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("resultado").innerText = "Respostas enviadas com sucesso!";
+            })
+            .catch(error => {
+                document.getElementById("resultado").innerText = "Erro ao enviar respostas!";
+            });
+        }
+    </script>
 </body>
 </html>
-
