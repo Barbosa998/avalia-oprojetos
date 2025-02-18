@@ -144,9 +144,10 @@
       formData.append('obs6', obs6);
       
       // Envia os dados para o Web App do Google Apps Script
-      fetch('https://script.google.com/macros/s/AKfycby173O9c3OaDebDMFNNFkEJC_8pwStDKFIhpnN6P3OhbWDfVRf_2QaZJOpbEXdmVFW4bw/exec', {
-        method: 'POST',
-        body: formData,
+     fetch('https://script.google.com/macros/s/AKfycby173O9c3OaDebDMFNNFkEJC_8pwStDKFIhpnN6P3OhbWDfVRf_2QaZJOpbEXdmVFW4bw/exec', {
+    method: 'POST',
+    body: formData,
+})
       })
       .then(response => response.text())
       .then(data => {
