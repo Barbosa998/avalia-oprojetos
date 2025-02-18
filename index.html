@@ -17,10 +17,7 @@
       padding: 20px;
       text-align: center;
     }
-    h2 {
-      margin-bottom: 30px;
-    }
-    /* Container principal */
+    h2 { margin-bottom: 30px; }
     .container {
       background: #fff;
       padding: 20px;
@@ -30,10 +27,7 @@
       margin: auto;
       text-align: left;
     }
-    /* Cada campo (label + input/textarea) */
-    .campo {
-      margin-bottom: 20px;
-    }
+    .campo { margin-bottom: 20px; }
     .campo label {
       display: block;
       background-color: #007bff;
@@ -55,10 +49,7 @@
       outline: none;
       box-sizing: border-box;
     }
-    /* Campo do range + observação */
-    .criterio-container {
-      margin-bottom: 20px;
-    }
+    .criterio-container { margin-bottom: 20px; }
     .criterio-container label {
       display: block;
       background-color: #007bff;
@@ -88,15 +79,8 @@
       box-sizing: border-box;
       resize: vertical;
     }
-    .nota {
-      font-weight: bold;
-      margin-left: 5px;
-    }
-    /* Botões */
-    .botoes {
-      margin-top: 30px;
-      text-align: center;
-    }
+    .nota { font-weight: bold; margin-left: 5px; }
+    .botoes { margin-top: 30px; text-align: center; }
     .botoes button {
       background: #007bff;
       color: white;
@@ -107,9 +91,7 @@
       margin-right: 10px;
       border-radius: 5px;
     }
-    .botoes button:hover {
-      background: #0056b3;
-    }
+    .botoes button:hover { background: #0056b3; }
     .resultado {
       margin-top: 20px;
       font-weight: bold;
@@ -168,7 +150,7 @@
       })
       .then(response => response.text())
       .then(data => {
-        alert(data); // Exibe a resposta (ex.: "Dados salvos com sucesso!")
+        alert(data); // Exibe a resposta do Apps Script ("Dados salvos com sucesso!")
         document.getElementById("formularioAvalicao").reset(); // Limpa o formulário
       })
       .catch(error => {
