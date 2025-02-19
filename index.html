@@ -1,271 +1,136 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Avaliação de Projetos Científicos 55</title>
-  
-  <style>
-    /* Estilização geral */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f8ff;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-    }
-    h2 {
-      margin-bottom: 30px;
-    }
-    /* Container principal */
-    .container {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      width: 60%;
-      margin: auto;
-      text-align: left;
-    }
-    /* Cada campo (label + input/textarea) */
-    .campo {
-      margin-bottom: 20px;
-    }
-    .campo label {
-      display: block;
-      background-color: #007bff;
-      color: #fff;
-      padding: 10px;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      font-weight: bold;
-      margin: 0;
-    }
-    .campo input[type="text"],
-    .campo textarea {
-      width: 100%;
-      border: 1px solid #007bff;
-      border-top: none;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-      padding: 10px;
-      outline: none;
-      box-sizing: border-box;
-    }
-    /* Campo do range + observação */
-    .criterio-container {
-      margin-bottom: 20px;
-    }
-    .criterio-container label {
-      display: block;
-      background-color: #007bff;
-      color: #fff;
-      padding: 10px;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      font-weight: bold;
-      margin: 0;
-    }
-    .criterio-inputs {
-      border: 1px solid #007bff;
-      border-top: none;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-      padding: 10px;
-    }
-    .criterio-inputs input[type="range"] {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .criterio-inputs textarea {
-      width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 10px;
-      box-sizing: border-box;
-      resize: vertical;
-    }
-    .nota {
-      font-weight: bold;
-      margin-left: 5px;
-    }
-    /* Botões */
-    .botoes {
-      margin-top: 30px;
-      text-align: center;
-    }
-    .botoes button {
-      background: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      padding: 12px 20px;
-      margin-right: 10px;
-      border-radius: 5px;
-    }
-    .botoes button:hover {
-      background: #0056b3;
-    }
-    .resultado {
-      margin-top: 20px;
-      font-weight: bold;
-      text-align: center;
-      color: #007bff;
-    }
-  </style>
-  
-  <script>
-    // Atualiza o valor do range em tempo real
-    function atualizarNota(criterioId, valorId) {
-      document.getElementById(valorId).innerText = document.getElementById(criterioId).value;
-    }
-
-    // Função que envia os dados para o Monkey Sheets
-    function salvarNoMonkeySheets() {
-      // Coleta os dados do formulário
-      let avaliador   = document.getElementById("avador").value;
-      let protocolo   = document.getElementById("protocolo").value;
-      let titulo      = document.getElementById("titulo").value;
-      let criterio1   = document.getElementById("criterio1").value;
-      let criterio2   = document.getElementById("criterio2").value;
-      let criterio3   = document.getElementById("criterio3").value;
-      let criterio4   = document.getElementById("criterio4").value;
-      let criterio5   = document.getElementById("criterio5").value;
-      let criterio6   = document.getElementById("criterio6").value;
-      let obs1        = document.getElementById("obs1").value;
-      let obs2        = document.getElementById("obs2").value;
-      let obs3        = document.getElementById("obs3").value;
-      let obs4        = document.getElementById("obs4").value;
-      let obs5        = document.getElementById("obs5").value;
-      let obs6        = document.getElementById("obs6").value;
-      
-      // Cria o objeto FormData com os dados
-      let formData = new FormData();
-      formData.append('avaliador', avaliador);
-      formData.append('protocolo', protocolo);
-      formData.append('titulo', titulo);
-      formData.append('criterio1', criterio1);
-      formData.append('criterio2', criterio2);
-      formData.append('criterio3', criterio3);
-      formData.append('criterio4', criterio4);
-      formData.append('criterio5', criterio5);
-      formData.append('criterio6', criterio6);
-      formData.append('obs1', obs1);
-      formData.append('obs2', obs2);
-      formData.append('obs3', obs3);
-      formData.append('obs4', obs4);
-      formData.append('obs5', obs5);
-      formData.append('obs6', obs6);
-      
-      // Envia os dados para o Monkey Sheets
-      fetch('https://api.sheetmonkey.io/form/ifYPJ1oWv9WVwn8LtefvpD', {
-        method: 'POST',
-        body: formData,
-      })
-      .then(response => response.text())
-      .then(data => {
-        alert(data); // Exibe a resposta (ex.: "Dados salvos com sucesso!")
-        document.getElementById("formularioAvalicao").reset(); // Limpa o formulário
-      })
-      .catch(error => {
-        alert("Erro ao salvar os dados: " + error);
-      });
-    }
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação de Projetos Científicos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        textarea {
+            height: 80px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #mensagem {
+            display: none;
+            color: green;
+            font-weight: bold;
+            margin-top: 15px;
+            text-align: center;
+        }
+        .slider-container {
+            display: flex;
+            align-items: center;
+        }
+        .slider-value {
+            margin-left: 10px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
+
     <h2>Avaliação de Projetos Científicos</h2>
-    
-    <!-- Formulário -->
-    <form id="formularioAvalicao">
-      <!-- Nome do Avaliador -->
-      <div class="campo">
-        <label for="avaliador">Nome do Avaliador</label>
-        <input type="text" id="avaliador" placeholder="Digite seu nome" required />
-      </div>
-      
-      <!-- Protocolo do Projeto -->
-      <div class="campo">
-        <label for="protocolo">Protocolo do Projeto</label>
-        <input type="text" id="protocolo" placeholder="Digite o protocolo do projeto" required />
-      </div>
-      
-      <!-- Título do Projeto -->
-      <div class="campo">
-        <label for="titulo">Título do Projeto</label>
-        <input type="text" id="titulo" placeholder="Digite o título do projeto" required />
-      </div>
-      
-      <!-- Critério 1 -->
-      <div class="criterio-container">
-        <label for="criterio1">Mérito e relevância do projeto...</label>
-        <div class="criterio-inputs">
-          <input type="range" id="criterio1" min="0" max="100" value="0" oninput="atualizarNota('criterio1','valor1')" />
-          <span id="valor1" class="nota">0</span>
-          <textarea id="obs1" placeholder="Observação Padrão"></textarea>
+
+    <form id="formAvaliacao" action="https://api.sheetmonkey.io/form/ifYPJ1oWv9WVwn8LtefvpD" method="post" onsubmit="exibirMensagem()">
+
+        <label>Nome do Avaliador:</label>
+        <input type="text" name="Nome do Avaliador" required />
+
+        <label>Protocolo do Projeto:</label>
+        <input type="text" name="Protocolo do Projeto" required />
+
+        <label>Título do Projeto:</label>
+        <input type="text" name="Título do Projeto" required />
+
+        <!-- Critérios de Avaliação -->
+        <label>Mérito, originalidade e relevância do projeto:</label>
+        <div class="slider-container">
+            <input type="range" name="Mérito e relevância" min="0" max="100" step="1" value="0" oninput="atualizarValor(this, 'valorMerito')" />
+            <span class="slider-value" id="valorMerito">0</span>
         </div>
-      </div>
-      
-      <!-- Critério 2 -->
-      <div class="criterio-container">
-        <label for="criterio2">Coerência do problema de pesquisa...</label>
-        <div class="criterio-inputs">
-          <input type="range" id="criterio2" min="0" max="100" value="0" oninput="atualizarNota('criterio2','valor2')" />
-          <span id="valor2" class="nota">0</span>
-          <textarea id="obs2" placeholder="Observação Padrão"></textarea>
+        <textarea name="Observação Mérito" placeholder="Justifique sua avaliação"></textarea>
+
+        <label>Coerência e adequação do problema de pesquisa aos objetivos, metodologia e resultados esperados:</label>
+        <div class="slider-container">
+            <input type="range" name="Coerência do problema" min="0" max="100" step="1" value="0" oninput="atualizarValor(this, 'valorCoerencia')" />
+            <span class="slider-value" id="valorCoerencia">0</span>
         </div>
-      </div>
-      
-      <!-- Critério 3 -->
-      <div class="criterio-container">
-        <label for="criterio3">Adequação do cronograma...</label>
-        <div class="criterio-inputs">
-          <input type="range" id="criterio3" min="0" max="100" value="0" oninput="atualizarNota('criterio3','valor3')" />
-          <span id="valor3" class="nota">0</span>
-          <textarea id="obs3" placeholder="Observação Padrão"></textarea>
+        <textarea name="Observação Coerência" placeholder="Justifique sua avaliação"></textarea>
+
+        <label>Coerência e adequação do cronograma de atividades com os resultados esperados:</label>
+        <div class="slider-container">
+            <input type="range" name="Adequação do cronograma" min="0" max="100" step="1" value="0" oninput="atualizarValor(this, 'valorCronograma')" />
+            <span class="slider-value" id="valorCronograma">0</span>
         </div>
-      </div>
-      
-      <!-- Critério 4 -->
-      <div class="criterio-container">
-        <label for="criterio4">Aderência ao tema Paraná 2040...</label>
-        <div class="criterio-inputs">
-          <input type="range" id="criterio4" min="0" max="100" value="0" oninput="atualizarNota('criterio4','valor4')" />
-          <span id="valor4" class="nota">0</span>
-          <textarea id="obs4" placeholder="Observação Padrão"></textarea>
+        <textarea name="Observação Cronograma" placeholder="Justifique sua avaliação"></textarea>
+
+        <label>Aderência do projeto aos temas do Paraná 2040 – Rotas Estratégicas de CT&I (Ecossistema Norte Pioneiro):</label>
+        <div class="slider-container">
+            <input type="range" name="Aderência Paraná 2040" min="0" max="100" step="1" value="0" oninput="atualizarValor(this, 'valorAderencia')" />
+            <span class="slider-value" id="valorAderencia">0</span>
         </div>
-      </div>
-      
-      <!-- Critério 5 -->
-      <div class="criterio-container">
-        <label for="criterio5">Experiência da equipe...</label>
-        <div class="criterio-inputs">
-          <input type="range" id="criterio5" min="0" max="100" value="0" oninput="atualizarNota('criterio5','valor5')" />
-          <span id="valor5" class="nota">0</span>
-          <textarea id="obs5" placeholder="Observação Padrão"></textarea>
+        <textarea name="Observação Aderência" placeholder="Justifique sua avaliação"></textarea>
+
+        <label>Coerência e adequação entre a experiência da equipe e os objetivos, atividades e metas do projeto:</label>
+        <div class="slider-container">
+            <input type="range" name="Experiência da equipe" min="0" max="100" step="1" value="0" oninput="atualizarValor(this, 'valorExperiencia')" />
+            <span class="slider-value" id="valorExperiencia">0</span>
         </div>
-      </div>
-      
-      <!-- Critério 6 -->
-      <div class="criterio-container">
-        <label for="criterio6">Plano de Divulgação Científica...</label>
-        <div class="criterio-inputs">
-          <input type="range" id="criterio6" min="0" max="100" value="0" oninput="atualizarNota('criterio6','valor6')" />
-          <span id="valor6" class="nota">0</span>
-          <textarea id="obs6" placeholder="Observação Padrão"></textarea>
+        <textarea name="Observação Experiência" placeholder="Justifique sua avaliação"></textarea>
+
+        <label>Plano para Promoção, Popularização e Divulgação Científica e Tecnológica:</label>
+        <div class="slider-container">
+            <input type="range" name="Divulgação Científica" min="0" max="100" step="1" value="0" oninput="atualizarValor(this, 'valorDivulgacao')" />
+            <span class="slider-value" id="valorDivulgacao">0</span>
         </div>
-      </div>
-      
-      <!-- Botão de envio -->
-      <div class="botoes">
-        <button type="button" onclick="salvarNoMonkeySheets()">Salvar Respostas</button>
-      </div>
-      
-      <!-- Resultado -->
-      <div class="resultado" id="resultado"></div>
+        <textarea name="Observação Divulgação" placeholder="Justifique sua avaliação"></textarea>
+
+        <input type="hidden" name="Created" value="x-sheetmonkey-current-date-time" />
+
+        <button type="submit">Enviar Avaliação</button>
+
     </form>
-  </div>
+
+    <p id="mensagem">✅ Resposta enviada com sucesso!</p>
+
+    <script>
+        function exibirMensagem() {
+            document.getElementById("mensagem").style.display = "block";
+        }
+
+        function atualizarValor(slider, valorId) {
+            document.getElementById(valorId).textContent = slider.value;
+        }
+    </script>
+
 </body>
 </html>
