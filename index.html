@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Avaliação de Projetos Científicos</title>
   
-  <!-- Biblioteca para exportar Excel (não utilizada neste exemplo) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
-  
   <style>
     /* Estilização geral */
     body {
@@ -124,8 +121,8 @@
       document.getElementById(valorId).innerText = document.getElementById(criterioId).value;
     }
 
-    // Função que envia os dados para o Google Sheets via Google Apps Script
-    function salvarNoGoogleSheets() {
+    // Função que envia os dados para o Monkey Sheets
+    function salvarNoMonkeySheets() {
       // Coleta os dados do formulário
       let avaliador   = document.getElementById("avaliador").value;
       let protocolo   = document.getElementById("protocolo").value;
@@ -161,8 +158,8 @@
       formData.append('obs5', obs5);
       formData.append('obs6', obs6);
       
-      // Envia os dados para o Web App do Google Apps Script
-      fetch('https://script.google.com/macros/s/AKfycby173O9c3OaDebDMFNNFkEJC_8pwStDKFIhpnN6P3OhbWDfVRf_2QaZJOpbEXdmVFW4bw/exec', {
+      // Envia os dados para o Monkey Sheets
+      fetch('https://api.sheetmonkey.io/form/ifYPJ1oWv9WVwn8LtefvpD', {
         method: 'POST',
         body: formData,
       })
@@ -263,7 +260,7 @@
       
       <!-- Botão de envio -->
       <div class="botoes">
-        <button type="button" onclick="salvarNoGoogleSheets()">Salvar Respostas</button>
+        <button type="button" onclick="salvarNoMonkeySheets()">Salvar Respostas</button>
       </div>
       
       <!-- Resultado -->
