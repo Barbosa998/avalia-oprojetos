@@ -1,122 +1,124 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulário de Avaliação</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Avaliação de Projetos Científicos</title>
+  
   <style>
+    /* Estilização geral */
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
+      background-color: #f0f8ff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
     }
-    .form-group {
-      margin-bottom: 15px;
+    h2 {
+      margin-bottom: 30px;
     }
-    label {
+    /* Container principal */
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      width: 60%;
+      margin: auto;
+      text-align: left;
+    }
+    /* Cada campo (label + input/textarea) */
+    .campo {
+      margin-bottom: 20px;
+    }
+    .campo label {
       display: block;
-      margin-bottom: 5px;
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      font-weight: bold;
+      margin: 0;
     }
-    input[type="text"], textarea {
+    .campo input[type="text"],
+    .campo textarea {
       width: 100%;
-      padding: 8px;
+      border: 1px solid #007bff;
+      border-top: none;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      padding: 10px;
+      outline: none;
       box-sizing: border-box;
     }
-    button {
-      padding: 10px 15px;
-      background-color: #007bff;
+    /* Botões */
+    .botoes {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .botoes button {
+      background: #007bff;
       color: white;
       border: none;
       cursor: pointer;
+      font-size: 16px;
+      padding: 12px 20px;
+      margin-right: 10px;
+      border-radius: 5px;
     }
-    button:hover {
-      background-color: #0056b3;
+    .botoes button:hover {
+      background: #0056b3;
+    }
+    .resultado {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+      color: #007bff;
     }
   </style>
 </head>
 <body>
-  <h2>Formulário de Avaliação</h2>
-  <form id="avaliacaoForm">
-    <div class="form-group">
-      <label for="avaliador">Nome do Avaliador:</label>
-      <input type="text" id="avaliador" name="avaliador" required>
-    </div>
-    <div class="form-group">
-      <label for="protocolo">Protocolo do Projeto:</label>
-      <input type="text" id="protocolo" name="protocolo" required>
-    </div>
-    <div class="form-group">
-      <label for="titulo">Título do Projeto:</label>
-      <input type="text" id="titulo" name="titulo" required>
-    </div>
-    <div class="form-group">
-      <label for="criterio1">Critério 1:</label>
-      <input type="text" id="criterio1" name="criterio1" required>
-    </div>
-    <div class="form-group">
-      <label for="criterio2">Critério 2:</label>
-      <input type="text" id="criterio2" name="criterio2" required>
-    </div>
-    <div class="form-group">
-      <label for="criterio3">Critério 3:</label>
-      <input type="text" id="criterio3" name="criterio3" required>
-    </div>
-    <div class="form-group">
-      <label for="criterio4">Critério 4:</label>
-      <input type="text" id="criterio4" name="criterio4" required>
-    </div>
-    <div class="form-group">
-      <label for="criterio5">Critério 5:</label>
-      <input type="text" id="criterio5" name="criterio5" required>
-    </div>
-    <div class="form-group">
-      <label for="criterio6">Critério 6:</label>
-      <input type="text" id="criterio6" name="criterio6" required>
-    </div>
-    <div class="form-group">
-      <label for="obs1">Observação 1:</label>
-      <input type="text" id="obs1" name="obs1">
-    </div>
-    <div class="form-group">
-      <label for="obs2">Observação 2:</label>
-      <input type="text" id="obs2" name="obs2">
-    </div>
-    <div class="form-group">
-      <label for="obs3">Observação 3:</label>
-      <input type="text" id="obs3" name="obs3">
-    </div>
-    <div class="form-group">
-      <label for="obs4">Observação 4:</label>
-      <input type="text" id="obs4" name="obs4">
-    </div>
-    <div class="form-group">
-      <label for="obs5">Observação 5:</label>
-      <input type="text" id="obs5" name="obs5">
-    </div>
-    <div class="form-group">
-      <label for="obs6">Observação 6:</label>
-      <input type="text" id="obs6" name="obs6">
-    </div>
-    <button type="submit">Enviar</button>
-  </form>
+  <div class="container">
+    <h2>Avaliação de Projetos Científicos</h2>
+    
+    <!-- Formulário -->
+    <form action="https://api.sheetmonkey.io/form/ifYPJ1oWv9WVwn8LtefvpD" method="post" id="formularioAvalicao">
+      <!-- Nome do Avaliador -->
+      <div class="campo">
+        <label for="avaliador">Nome do Avaliador</label>
+        <input type="text" id="avaliador" name="Nome do Avaliador" placeholder="Digite seu nome" required />
+      </div>
+      
+      <!-- Protocolo do Projeto -->
+      <div class="campo">
+        <label for="protocolo">Protocolo do Projeto</label>
+        <input type="text" id="protocolo" name="Protocolo do Projeto" placeholder="Digite o protocolo do projeto" required />
+      </div>
+      
+      <!-- Título do Projeto -->
+      <div class="campo">
+        <label for="titulo">Título do Projeto</label>
+        <input type="text" id="titulo" name="Título do Projeto" placeholder="Digite o título do projeto" required />
+      </div>
 
-  <script>
-    document.getElementById('avaliacaoForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      fetch('https://script.google.com/macros/s/AKfycbxfTJNEMSWhed7wn3W2z-jSuouo3Wh2zM5kXwrDzYhu/dev', {  // Substitua com sua URL de Web App
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.text())
-      .then(data => {
-        alert('Dados enviados com sucesso!');
-        this.reset();
-      })
-      .catch(error => {
-        alert('Erro ao enviar os dados.');
-        console.error('Erro:', error);
-      });
-    });
-  </script>
+      <!-- Critérios e Observações -->
+      <div class="campo">
+        <label for="criterio1">Mérito e relevância do projeto...</label>
+        <input type="range" id="criterio1" name="Criterio 1" min="0" max="100" value="0" oninput="document.getElementById('valor1').innerText = this.value" />
+        <span id="valor1" class="nota">0</span>
+        <textarea id="obs1" name="Observação 1" placeholder="Observação Padrão"></textarea>
+      </div>
+      <!-- Repita o bloco acima para outros critérios (2 a 6) -->
+
+      <!-- Botão de envio -->
+      <div class="botoes">
+        <input type="submit" value="Salvar Respostas" />
+      </div>
+      
+      <!-- Resultado -->
+      <div class="resultado" id="resultado"></div>
+    </form>
+  </div>
 </body>
 </html>
