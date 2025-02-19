@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulário de Avaliação de Projeto</title>
+  <title>Formulário de Avaliação</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -16,7 +16,7 @@
       display: block;
       margin-bottom: 5px;
     }
-    input[type="text"], input[type="number"], textarea {
+    input[type="text"], textarea {
       width: 100%;
       padding: 8px;
       box-sizing: border-box;
@@ -34,7 +34,7 @@
   </style>
 </head>
 <body>
-  <h2>Formulário de Avaliação de Projeto</h2>
+  <h2>Formulário de Avaliação</h2>
   <form id="avaliacaoForm">
     <div class="form-group">
       <label for="avaliador">Nome do Avaliador:</label>
@@ -49,61 +49,61 @@
       <input type="text" id="titulo" name="titulo" required>
     </div>
     <div class="form-group">
-      <label for="criterio1">Critério 1: Relevância do Tema</label>
-      <input type="number" id="criterio1" name="criterio1" min="0" max="10" required>
+      <label for="criterio1">Critério 1:</label>
+      <input type="text" id="criterio1" name="criterio1" required>
     </div>
     <div class="form-group">
-      <label for="criterio2">Critério 2: Clareza dos Objetivos</label>
-      <input type="number" id="criterio2" name="criterio2" min="0" max="10" required>
+      <label for="criterio2">Critério 2:</label>
+      <input type="text" id="criterio2" name="criterio2" required>
     </div>
     <div class="form-group">
-      <label for="criterio3">Critério 3: Metodologia Adequada</label>
-      <input type="number" id="criterio3" name="criterio3" min="0" max="10" required>
+      <label for="criterio3">Critério 3:</label>
+      <input type="text" id="criterio3" name="criterio3" required>
     </div>
     <div class="form-group">
-      <label for="criterio4">Critério 4: Originalidade</label>
-      <input type="number" id="criterio4" name="criterio4" min="0" max="10" required>
+      <label for="criterio4">Critério 4:</label>
+      <input type="text" id="criterio4" name="criterio4" required>
     </div>
     <div class="form-group">
-      <label for="criterio5">Critério 5: Qualidade da Apresentação</label>
-      <input type="number" id="criterio5" name="criterio5" min="0" max="10" required>
+      <label for="criterio5">Critério 5:</label>
+      <input type="text" id="criterio5" name="criterio5" required>
     </div>
     <div class="form-group">
-      <label for="criterio6">Critério 6: Potencial de Impacto</label>
-      <input type="number" id="criterio6" name="criterio6" min="0" max="10" required>
+      <label for="criterio6">Critério 6:</label>
+      <input type="text" id="criterio6" name="criterio6" required>
     </div>
     <div class="form-group">
-      <label for="obs1">Observações sobre o Critério 1:</label>
-      <textarea id="obs1" name="obs1" rows="3"></textarea>
+      <label for="obs1">Observação 1:</label>
+      <input type="text" id="obs1" name="obs1">
     </div>
     <div class="form-group">
-      <label for="obs2">Observações sobre o Critério 2:</label>
-      <textarea id="obs2" name="obs2" rows="3"></textarea>
+      <label for="obs2">Observação 2:</label>
+      <input type="text" id="obs2" name="obs2">
     </div>
     <div class="form-group">
-      <label for="obs3">Observações sobre o Critério 3:</label>
-      <textarea id="obs3" name="obs3" rows="3"></textarea>
+      <label for="obs3">Observação 3:</label>
+      <input type="text" id="obs3" name="obs3">
     </div>
     <div class="form-group">
-      <label for="obs4">Observações sobre o Critério 4:</label>
-      <textarea id="obs4" name="obs4" rows="3"></textarea>
+      <label for="obs4">Observação 4:</label>
+      <input type="text" id="obs4" name="obs4">
     </div>
     <div class="form-group">
-      <label for="obs5">Observações sobre o Critério 5:</label>
-      <textarea id="obs5" name="obs5" rows="3"></textarea>
+      <label for="obs5">Observação 5:</label>
+      <input type="text" id="obs5" name="obs5">
     </div>
     <div class="form-group">
-      <label for="obs6">Observações sobre o Critério 6:</label>
-      <textarea id="obs6" name="obs6" rows="3"></textarea>
+      <label for="obs6">Observação 6:</label>
+      <input type="text" id="obs6" name="obs6">
     </div>
-    <button type="submit">Enviar Avaliação</button>
+    <button type="submit">Enviar</button>
   </form>
 
   <script>
     document.getElementById('avaliacaoForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const formData = new FormData(this);
-      fetch('https://script.google.com/macros/s/AKfycbxfTJNEMSWhed7wn3W2z-jSuouo3Wh2zM5kXwrDzYhu/dev', {
+      fetch('https://script.google.com/macros/s/AKfycbxfTJNEMSWhed7wn3W2z-jSuouo3Wh2zM5kXwrDzYhu/dev', {  // Substitua com sua URL de Web App
         method: 'POST',
         body: formData
       })
